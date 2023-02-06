@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}KECian | Login{% endblock title %}
+{% block lsbtn %}<a href="{% url 'signup' %}" class="btn btn-outline-info rounded-pill">Sign Up</a>{% endblock lsbtn %}
+{% block bgimg %}
+{% endblock bgimg %}
+
+{% block content %}
+<style>
+    .g{
+        color: rgb(247, 250, 83);
+    }
+</style>
+<div class="container mt-3 {% if content.highlight %}gradient-border{% endif %}" style="border: 1px solid {{bordercolor}};">
+    <h3 class="text-center my-3">{{content.title|safe}}</h3>
+    {% if content.author.username %}
+    <div class="container">
+    </div>
+    <div class="card mb-3">
+        <div class="card-body bg-dark text-light">
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-3">
+                    <span class="text-start"><strong>Author</strong>: {{content.author.username|title}}</span>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-3">
+                    {% if followbtn %}
+                    <center>
+                        <form action="/follow/{{content.author.username}}" method="POST">
+                            <input type="submit" value="Follow {{content.author.username|title}}" class="btn btn-outline-info">
+                        </form>
+                    </center>
+                    {% endif %}
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-6">
+                    <span class="text-right"><strong>Published on</strong>: {{content.dt_published}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{content.content|safe}}
+    {% endif %}
+</div>
+
+{% endblock content %}
